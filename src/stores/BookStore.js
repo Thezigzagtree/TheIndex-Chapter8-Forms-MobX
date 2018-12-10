@@ -36,6 +36,14 @@ class BookStore {
   getBooksByColor(color) {
     return this.filteredBooks.filter(book => book.color === color);
   }
+
+  addBook(newBook) {
+    axios
+      .post("https://the-index-api.herokuapp.com/api/books/", newBook)
+      .then(res => res.data)
+      .then(newBook => this.books.push(newBook))
+      .catch(err => console.log(err.response.data));
+  }
 }
 
 decorate(BookStore, {

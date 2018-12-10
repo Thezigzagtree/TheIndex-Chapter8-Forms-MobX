@@ -34,6 +34,14 @@ class AuthorStore {
   getAuthorById(id) {
     return this.authors.find(author => +author.id === +id);
   }
+
+  addAuthor(newAuthor) {
+    axios
+      .post("https://the-index-api.herokuapp.com/api/authors/", newAuthor)
+      .then(res => res.data)
+      .then(newAuthor => this.authors.push(newAuthor))
+      .catch(err => console.log(err));
+  }
 }
 
 decorate(AuthorStore, {
